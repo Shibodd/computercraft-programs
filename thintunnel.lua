@@ -62,7 +62,7 @@ for n = 1, length do
     turtle.dig()
     turtle.digDown()
     
-    while not tryForward() then
+    while not tryForward() do
         print("Cannot move! Press a key to retry.")
         os.pullEvent("key")
     end
