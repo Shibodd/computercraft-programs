@@ -45,33 +45,6 @@ local function refuel()
     end
 end
 
-local function tryDig()
-    while turtle.detect() do
-        if not turtle.dig() then
-            return false
-        end
-        sleep(0.5)
-    end
-end
-
-local function tryDigDown()
-    while turtle.detectDown() do
-        if not turtle.digDown() then
-            return false
-        end
-        sleep(0.5)
-    end
-end
-
-local function tryDigUp()
-    while turtle.detectUp() do
-        if not turtle.digUp() then
-            return false
-        end
-        sleep(0.5)
-    end
-end
-
 local function tryForward()
     refuel()
     while not turtle.forward() do
@@ -84,21 +57,9 @@ local function tryForward()
     return true
 end
 
-local function tryDown()
-    refuel()
-    while not turtle.down() do
-        if tryDigDown() or turtle.attackDown() then
-            sleep(0.5)
-        else
-            return false
-        end
-    end
-    return true
-end
-
 for n = 1, length do
-    tryDigUp()
-    tryDig()
-    tryDigDown()
+    turtle.digUp()
+    turtle.dig()
+    turtle.digDown()
     tryForward()
 end
