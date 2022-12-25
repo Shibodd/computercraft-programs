@@ -48,7 +48,7 @@ end
 local function tryForward()
     refuel()
     while not turtle.forward() do
-        if tryDig() or turtle.attack() then
+        if turtle.dig() or turtle.attack() then
             sleep(0.5)
         else
             return false
@@ -61,5 +61,9 @@ for n = 1, length do
     turtle.digUp()
     turtle.dig()
     turtle.digDown()
-    tryForward()
+    
+    while not tryForward() then
+        print("Cannot move! Press a key to retry.")
+        os.pullEvent("key")
+    end
 end
