@@ -91,6 +91,7 @@ local function turn(y, z, w)
 end
 
 for z = 1, height do
+    print("Level " .. z .. "/" .. height)
     for y = 1, width do
         for x = 1, length do
             turtle.digUp()
@@ -109,10 +110,15 @@ for z = 1, height do
         end
     end
 
+
+
     turtle.turnRight()
     turtle.turnRight()
-    for i = 1, 3 do
-        turtle.digDown()
-        forceMove(tryDown)
+
+    if z ~= height then
+        for i = 1, 3 do
+            turtle.digDown()
+            forceMove(tryDown)
+        end
     end
 end
