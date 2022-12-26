@@ -78,11 +78,27 @@ local function forceMove(fun)
     end
 end
 
-local function turn(x)
-    if x % 2 == 0 then
-        turtle.turnLeft()
-    else
+local function turn(y, z, width)
+    local _y = y % 2 ~= 0
+    local _w = w % 2 ~= 0
+    local _z = z % 2 ~= 0
+
+    -- synthetise this with karnaugh and call it a day.
+    
+    -- w even
+    --  	    y even	y odd
+    -- z even	r       l
+    -- z odd    l	    r
+
+    -- w odd
+    --          y even	y odd
+    -- z even	r	    l
+    -- z odd	r	    l
+
+    if (not (_y and _z)) or (_w and (not _y) and _z) or ((not _w) and _y and _z) then
         turtle.turnRight()
+    else
+        turtle.turnLeft()
     end
 end
 
@@ -92,11 +108,10 @@ for z = 1, height do
             turtle.digUp()
             turtle.dig()
             turtle.digDown()
-            
             forceMove(tryForward)
         end
     
-        turn(y)
+        turn(y, z, width)
         turtle.dig()
         forceMove(tryForward)
         turn(y)
