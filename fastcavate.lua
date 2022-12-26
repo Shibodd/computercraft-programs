@@ -80,7 +80,7 @@ end
 
 local function turn(y, z, width)
     local _y = y % 2 ~= 0
-    local _w = w % 2 ~= 0
+    local _w = width % 2 ~= 0
     local _z = z % 2 ~= 0
 
     -- synthetise this with karnaugh and call it a day.
@@ -102,9 +102,9 @@ local function turn(y, z, width)
     end
 end
 
-for z = 1, height do
-    for y = 1, width do
-        for x = 1, length do
+for z = 0, height - 1 do
+    for y = 0, width - 1 do
+        for x = 0, length - 1 do
             turtle.digUp()
             turtle.dig()
             turtle.digDown()
@@ -120,7 +120,7 @@ for z = 1, height do
     turtle.turnRight()
     turtle.turnRight()
 
-    for i = 1, 3 do
+    for i = 0, 2 do
         turtle.digDown()
         forceMove(tryDown)
     end
